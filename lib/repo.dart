@@ -9,8 +9,8 @@ class PostRepository {
     Response response = await get(Uri.parse(endpoint));
 
     if (response.statusCode == 200) {
-      final List<Map<String, dynamic>> result = jsonDecode(response.body);
-      return result.map((e) => PostModel.fromJson(e)).toList();
+      List<dynamic> result = jsonDecode(response.body);
+      return List<PostModel>.from(result.map((e) => PostModel.fromJson(e)));
     } else {
       throw Exception(response.reasonPhrase);
     }

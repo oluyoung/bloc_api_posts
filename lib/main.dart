@@ -39,34 +39,41 @@ class Home extends StatelessWidget {
       )..add(LoadPostEvent()),
       child: Scaffold(
           appBar: AppBar(title: const Text('The bloc app')),
-          body: BlocBuilder<PostBloc, PostState>(
-            builder: (context, state) {
-              if (state is PostLoadingState) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (state is PostLoadedState) {
-                List<PostModel> posts = state.posts;
-                return ListView.builder(
-                  itemCount: posts.length,
-                  itemBuilder: (_, index) {
-                    PostModel _post = posts[index];
-                    return Card(
-                        color: Colors.amber[800],
-                        elevation: 4,
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          title: Text(_post.post['title']),
-                          subtitle: Text(_post.post['body']),
-                        ));
-                  },
-                );
-                // const Center(child: Text('The second state'));
-              }
-
-              return Container();
-            },
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: BlocBuilder<PostBloc, PostState>(
+              builder: (context, state) {
+                if (state is PostLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state is PostLoadedState) {
+                  List<PostModel> posts = state.posts;
+                  return ListView.builder(
+                    itemCount: posts.length,
+                    itemBuilder: (_, index) {
+                      Map<String, dynamic> post = posts[index].post;
+                      return Card(
+                          color: Colors.white70,
+                          elevation: 4,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          child: ListTile(
+                            title: Text(post['title'], style: TextStyle(
+                              color: Colors.red[700],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),),
+                            subtitle: Text(post['body']),
+                          ));
+                    },
+                  );
+                  // const Center(child: Text('The second state'));
+                }
+            
+                return Container();
+              },
+            ),
           )),
     );
   }
