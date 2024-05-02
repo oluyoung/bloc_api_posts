@@ -59,18 +59,21 @@ class Home extends StatelessWidget {
                           elevation: 4,
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           child: ListTile(
-                            title: Text(post['title'], style: TextStyle(
-                              color: Colors.red[700],
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),),
+                            title: Text(
+                              post['title'],
+                              style: TextStyle(
+                                color: Colors.red[700],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
                             subtitle: Text(post['body']),
                           ));
                     },
                   );
                   // const Center(child: Text('The second state'));
                 }
-            
+
                 return Container();
               },
             ),
